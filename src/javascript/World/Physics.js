@@ -192,40 +192,40 @@ export default class Physics
             /**
              * Wheel
              */
-            // this.car.wheels = {}
-            // this.car.wheels.options = {
-            //     radius: this.car.options.wheelRadius,
-            //     height: this.car.options.wheelHeight,
-            //     suspensionStiffness: this.car.options.wheelSuspensionStiffness,
-            //     suspensionRestLength: this.car.options.wheelSuspensionRestLength,
-            //     frictionSlip: this.car.options.wheelFrictionSlip,
-            //     dampingRelaxation: this.car.options.wheelDampingRelaxation,
-            //     dampingCompression: this.car.options.wheelDampingCompression,
-            //     maxSuspensionForce: this.car.options.wheelMaxSuspensionForce,
-            //     rollInfluence: this.car.options.wheelRollInfluence,
-            //     maxSuspensionTravel: this.car.options.wheelMaxSuspensionTravel,
-            //     customSlidingRotationalSpeed: this.car.options.wheelCustomSlidingRotationalSpeed,
-            //     useCustomSlidingRotationalSpeed: true,
-            //     directionLocal: new CANNON.Vec3(0, 0, - 1),
-            //     axleLocal: new CANNON.Vec3(0, 1, 0),
-            //     chassisConnectionPointLocal: new CANNON.Vec3(1, 1, 0) // Will be changed for each wheel
-            // }
+             this.car.wheels = {}
+             this.car.wheels.options = {
+                 radius: this.car.options.wheelRadius,
+                 height: this.car.options.wheelHeight,
+                 suspensionStiffness: this.car.options.wheelSuspensionStiffness,
+                 suspensionRestLength: this.car.options.wheelSuspensionRestLength,
+                 frictionSlip: this.car.options.wheelFrictionSlip,
+                 dampingRelaxation: this.car.options.wheelDampingRelaxation,
+                 dampingCompression: this.car.options.wheelDampingCompression,
+                 maxSuspensionForce: this.car.options.wheelMaxSuspensionForce,
+                 rollInfluence: this.car.options.wheelRollInfluence,
+                 maxSuspensionTravel: this.car.options.wheelMaxSuspensionTravel,
+                 customSlidingRotationalSpeed: this.car.options.wheelCustomSlidingRotationalSpeed,
+                 useCustomSlidingRotationalSpeed: true,
+                 directionLocal: new CANNON.Vec3(0, 0, - 1),
+                 axleLocal: new CANNON.Vec3(0, 1, 0),
+                 chassisConnectionPointLocal: new CANNON.Vec3(1, 1, 0) // Will be changed for each wheel
+             }
 
-            // // Front left
-            // this.car.wheels.options.chassisConnectionPointLocal.set(this.car.options.wheelFrontOffsetDepth, this.car.options.wheelOffsetWidth, 0)
-            // this.car.vehicle.addWheel(this.car.wheels.options)
+            // Front left
+             this.car.wheels.options.chassisConnectionPointLocal.set(this.car.options.wheelFrontOffsetDepth, this.car.options.wheelOffsetWidth, 0)
+             this.car.vehicle.addWheel(this.car.wheels.options)
 
-            // // Front right
-            // this.car.wheels.options.chassisConnectionPointLocal.set(this.car.options.wheelFrontOffsetDepth, - this.car.options.wheelOffsetWidth, 0)
-            // this.car.vehicle.addWheel(this.car.wheels.options)
+            // Front right
+             this.car.wheels.options.chassisConnectionPointLocal.set(this.car.options.wheelFrontOffsetDepth, - this.car.options.wheelOffsetWidth, 0)
+             this.car.vehicle.addWheel(this.car.wheels.options)
 
-            // // Back left
-            // this.car.wheels.options.chassisConnectionPointLocal.set(this.car.options.wheelBackOffsetDepth, this.car.options.wheelOffsetWidth, 0)
-            // this.car.vehicle.addWheel(this.car.wheels.options)
+            // Back left
+             this.car.wheels.options.chassisConnectionPointLocal.set(this.car.options.wheelBackOffsetDepth, this.car.options.wheelOffsetWidth, 0)
+             this.car.vehicle.addWheel(this.car.wheels.options)
 
-            // // Back right
-            // this.car.wheels.options.chassisConnectionPointLocal.set(this.car.options.wheelBackOffsetDepth, - this.car.options.wheelOffsetWidth, 0)
-            // this.car.vehicle.addWheel(this.car.wheels.options)
+            // Back right
+             this.car.wheels.options.chassisConnectionPointLocal.set(this.car.options.wheelBackOffsetDepth, - this.car.options.wheelOffsetWidth, 0)
+             this.car.vehicle.addWheel(this.car.wheels.options)
 
             this.car.vehicle.addToWorld(this.world)
 
