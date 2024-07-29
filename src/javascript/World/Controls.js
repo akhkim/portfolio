@@ -179,7 +179,7 @@ export default class Controls extends EventEmitter
         this.touch.joystick.$limit.style.top = 'calc(50% - 75px)'
         this.touch.joystick.$limit.style.left = 'calc(50% - 75px)'
         this.touch.joystick.$limit.style.width = '150px'
-        this.touch.joystick.$limit.style.height = '65px'
+        this.touch.joystick.$limit.style.height = '150px'
         this.touch.joystick.$limit.style.border = '2px solid #ffffff'
         this.touch.joystick.$limit.style.borderRadius = '50%'
         this.touch.joystick.$limit.style.opacity = '0.25'
