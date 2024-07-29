@@ -1,4 +1,5 @@
 import mobileDoubleTriangle from '../../images/mobile/doubleTriangle.png'
+import mobileTriangle from '../../images/mobile/triangle.png'
 import mobileCross from '../../images/mobile/cross.png'
 import EventEmitter from '../Utils/EventEmitter'
 
@@ -16,7 +17,6 @@ export default class Controls extends EventEmitter
 
         this.setActions()
         this.setKeyboard()
-        this.setTouch()
     }
 
     setActions()
@@ -45,7 +45,95 @@ export default class Controls extends EventEmitter
 
     setKeyboard()
     {
-        // ... (keep the keyboard controls as they were)
+        this.keyboard = {}
+        this.keyboard.events = {}
+
+        this.keyboard.events.keyDown = (_event) =>
+        {
+            switch(_event.code)
+            {
+                case 'ArrowUp':
+                case 'KeyW':
+                    this.camera.pan.reset()
+                    this.actions.down = true
+                    break
+
+                case 'ArrowRight':
+                case 'KeyD':
+                    this.actions.left = true
+                    break
+
+                case 'ArrowDown':
+                case 'KeyS':
+                    this.camera.pan.reset()
+                    this.actions.up = true
+                    break
+
+                case 'ArrowLeft':
+                case 'KeyA':
+                    this.actions.right = true
+                    break
+
+                case 'ControlRight':
+                case 'ControlLeft':
+                case 'Space':
+                    this.actions.brake = true
+                    break
+
+                case 'ShiftRight':
+                case 'ShiftLeft':
+                    this.actions.boost = true
+                    break
+
+                // case ' ':
+                //     this.jump(true)
+                //     break
+            }
+        }
+
+        this.keyboard.events.keyUp = (_event) =>
+        {
+            switch(_event.code)
+            {
+                case 'ArrowDown':
+                case 'KeyS':
+                    this.actions.up = false
+                    break
+
+                case 'ArrowLeft':
+                case 'KeyA':
+                    this.actions.right = false
+                    break
+
+                case 'ArrowUp':
+                case 'KeyW':
+                    this.actions.down = false
+                    break
+
+                case 'ArrowRight':
+                case 'KeyD':
+                    this.actions.left = false
+                    break
+
+                case 'ControlRight':
+                case 'ControlLeft':
+                case 'Space':
+                    this.actions.brake = false
+                    break
+
+                case 'ShiftRight':
+                case 'ShiftLeft':
+                    this.actions.boost = false
+                    break
+
+                case 'KeyR':
+                    this.trigger('action', ['reset'])
+                    break
+            }
+        }
+
+        document.addEventListener('keydown', this.keyboard.events.keyDown)
+        document.addEventListener('keyup', this.keyboard.events.keyUp)
     }
 
     setTouch()
@@ -70,6 +158,7 @@ export default class Controls extends EventEmitter
         this.touch.joystick.$element.style.transition = 'opacity 0.3s 0.0s'
         this.touch.joystick.$element.style.willChange = 'opacity'
         this.touch.joystick.$element.style.opacity = '0'
+        // this.touch.joystick.$element.style.backgroundColor = '#ff0000'
         document.body.appendChild(this.touch.joystick.$element)
 
         this.touch.joystick.$cursor = document.createElement('div')
@@ -101,7 +190,7 @@ export default class Controls extends EventEmitter
         // Angle
         this.touch.joystick.angle = {}
 
-        this.touch.joystick.angle.offset = Math.PI * 0.5 // Changed to rotate 90 degrees
+        this.touch.joystick.angle.offset = Math.PI * 0.18
 
         this.touch.joystick.angle.center = {}
         this.touch.joystick.angle.center.x = 0
@@ -112,7 +201,7 @@ export default class Controls extends EventEmitter
         this.touch.joystick.angle.current.y = 0
 
         this.touch.joystick.angle.originalValue = 0
-        this.touch.joystick.angle.value = 0
+        this.touch.joystick.angle.value = - Math.PI * 0.5
 
         // Resize
         this.touch.joystick.resize = () =>
@@ -153,40 +242,6 @@ export default class Controls extends EventEmitter
                 const cursorX = Math.sin(this.touch.joystick.angle.originalValue + Math.PI * 0.5) * radius
                 const cursorY = Math.cos(this.touch.joystick.angle.originalValue + Math.PI * 0.5) * radius
                 this.touch.joystick.$cursor.style.transform = `translateX(${cursorX}px) translateY(${cursorY}px)`
-
-                // Set forward/backward based on joystick position
-                const verticalPosition = Math.cos(this.touch.joystick.angle.value)
-                if (verticalPosition > 0.3) {
-                    this.actions.down = true
-                    this.actions.up = false
-                } else if (verticalPosition < -0.3) {
-                    this.actions.up = true
-                    this.actions.down = false
-                } else {
-                    this.actions.up = false
-                    this.actions.down = false
-                }
-
-                // Set left/right based on joystick position
-                const horizontalPosition = Math.sin(this.touch.joystick.angle.value)
-                if (horizontalPosition > 0.3) {
-                    this.actions.right = true
-                    this.actions.left = false
-                } else if (horizontalPosition < -0.3) {
-                    this.actions.left = true
-                    this.actions.right = false
-                } else {
-                    this.actions.left = false
-                    this.actions.right = false
-                }
-            }
-            else
-            {
-                // Reset all directional actions when joystick is not active
-                this.actions.up = false
-                this.actions.down = false
-                this.actions.left = false
-                this.actions.right = false
             }
         })
 
@@ -247,7 +302,6 @@ export default class Controls extends EventEmitter
                 this.touch.joystick.$cursor.style.transform = 'translateX(0px) translateY(0px)'
 
                 document.removeEventListener('touchend', this.touch.joystick.events.touchend)
-                document.removeEventListener('touchmove', this.touch.joystick.events.touchmove, { passive: false })
 
                 this.trigger('joystickEnd')
             }
@@ -338,7 +392,89 @@ export default class Controls extends EventEmitter
         }
 
         this.touch.boost.$element.addEventListener('touchstart', this.touch.boost.events.touchstart)
-        
+
+        /**
+         * Forward
+         */
+        this.touch.forward = {}
+
+        // Element
+        this.touch.forward.$element = document.createElement('div')
+        this.touch.forward.$element.style.userSelect = 'none'
+        this.touch.forward.$element.style.position = 'fixed'
+        this.touch.forward.$element.style.bottom = 'calc(70px * 2 + 15px)'
+        this.touch.forward.$element.style.right = '0px'
+        this.touch.forward.$element.style.width = '95px'
+        this.touch.forward.$element.style.height = '70px'
+        this.touch.forward.$element.style.transition = 'opacity 0.3s 0.3s'
+        this.touch.forward.$element.style.willChange = 'opacity'
+        this.touch.forward.$element.style.opacity = '0'
+        // this.touch.forward.$element.style.backgroundColor = '#00ff00'
+        document.body.appendChild(this.touch.forward.$element)
+
+        this.touch.forward.$border = document.createElement('div')
+        this.touch.forward.$border.style.position = 'absolute'
+        this.touch.forward.$border.style.top = 'calc(50% - 30px)'
+        this.touch.forward.$border.style.left = 'calc(50% - 30px)'
+        this.touch.forward.$border.style.width = '60px'
+        this.touch.forward.$border.style.height = '60px'
+        this.touch.forward.$border.style.border = '2px solid #ffffff'
+        this.touch.forward.$border.style.borderRadius = '10px'
+        this.touch.forward.$border.style.boxSizing = 'border-box'
+        this.touch.forward.$border.style.opacity = '0.25'
+        this.touch.forward.$border.style.willChange = 'opacity'
+        this.touch.forward.$element.appendChild(this.touch.forward.$border)
+
+        this.touch.forward.$icon = document.createElement('div')
+        this.touch.forward.$icon.style.position = 'absolute'
+        this.touch.forward.$icon.style.top = 'calc(50% - 9px)'
+        this.touch.forward.$icon.style.left = 'calc(50% - 11px)'
+        this.touch.forward.$icon.style.width = '22px'
+        this.touch.forward.$icon.style.height = '18px'
+        this.touch.forward.$icon.style.backgroundImage = `url(${mobileTriangle})`
+        this.touch.forward.$icon.style.backgroundSize = 'cover'
+        this.touch.forward.$element.appendChild(this.touch.forward.$icon)
+
+        // Events
+        this.touch.forward.events = {}
+        this.touch.forward.touchIdentifier = null
+        this.touch.forward.events.touchstart = (_event) =>
+        {
+            _event.preventDefault()
+
+            const touch = _event.changedTouches[0]
+
+            if(touch)
+            {
+                this.camera.pan.reset()
+
+                this.touch.forward.touchIdentifier = touch.identifier
+
+                this.actions.down = true
+
+                this.touch.forward.$border.style.opacity = '0.5'
+
+                document.addEventListener('touchend', this.touch.forward.events.touchend)
+            }
+        }
+
+        this.touch.forward.events.touchend = (_event) =>
+        {
+            const touches = [..._event.changedTouches]
+            const touch = touches.find((_touch) => _touch.identifier === this.touch.forward.touchIdentifier)
+
+            if(touch)
+            {
+                this.actions.down = false
+
+                this.touch.forward.$border.style.opacity = '0.25'
+
+                document.removeEventListener('touchend', this.touch.forward.events.touchend)
+            }
+        }
+
+        this.touch.forward.$element.addEventListener('touchstart', this.touch.forward.events.touchstart)
+
         /**
          * Brake
          */
@@ -420,11 +556,96 @@ export default class Controls extends EventEmitter
 
         this.touch.brake.$element.addEventListener('touchstart', this.touch.brake.events.touchstart)
 
+        /**
+         * Backward
+         */
+        this.touch.backward = {}
+
+        // Element
+        this.touch.backward.$element = document.createElement('div')
+        this.touch.backward.$element.style.userSelect = 'none'
+        this.touch.backward.$element.style.position = 'fixed'
+        this.touch.backward.$element.style.bottom = '15px'
+        this.touch.backward.$element.style.right = '0px'
+        this.touch.backward.$element.style.width = '95px'
+        this.touch.backward.$element.style.height = '70px'
+        this.touch.backward.$element.style.transition = 'opacity 0.3s 0.1s'
+        this.touch.backward.$element.style.willChange = 'opacity'
+        this.touch.backward.$element.style.opacity = '0'
+        // this.touch.backward.$element.style.backgroundColor = '#0000ff'
+        document.body.appendChild(this.touch.backward.$element)
+
+        this.touch.backward.$border = document.createElement('div')
+        this.touch.backward.$border.style.position = 'absolute'
+        this.touch.backward.$border.style.top = 'calc(50% - 30px)'
+        this.touch.backward.$border.style.left = 'calc(50% - 30px)'
+        this.touch.backward.$border.style.width = '60px'
+        this.touch.backward.$border.style.height = '60px'
+        this.touch.backward.$border.style.border = '2px solid #ffffff'
+        this.touch.backward.$border.style.borderRadius = '10px'
+        this.touch.backward.$border.style.boxSizing = 'border-box'
+        this.touch.backward.$border.style.opacity = '0.25'
+        this.touch.backward.$border.style.willChange = 'opacity'
+        this.touch.backward.$element.appendChild(this.touch.backward.$border)
+
+        this.touch.backward.$icon = document.createElement('div')
+        this.touch.backward.$icon.style.position = 'absolute'
+        this.touch.backward.$icon.style.top = 'calc(50% - 9px)'
+        this.touch.backward.$icon.style.left = 'calc(50% - 11px)'
+        this.touch.backward.$icon.style.width = '22px'
+        this.touch.backward.$icon.style.height = '18px'
+        this.touch.backward.$icon.style.backgroundImage = `url(${mobileTriangle})`
+        this.touch.backward.$icon.style.backgroundSize = 'cover'
+        this.touch.backward.$icon.style.transform = 'rotate(180deg)'
+        this.touch.backward.$element.appendChild(this.touch.backward.$icon)
+
+        // Events
+        this.touch.backward.events = {}
+        this.touch.backward.touchIdentifier = null
+        this.touch.backward.events.touchstart = (_event) =>
+        {
+            _event.preventDefault()
+
+            const touch = _event.changedTouches[0]
+
+            if(touch)
+            {
+                this.camera.pan.reset()
+
+                this.touch.backward.touchIdentifier = touch.identifier
+
+                this.actions.up = true
+
+                this.touch.backward.$border.style.opacity = '0.5'
+
+                document.addEventListener('touchend', this.touch.backward.events.touchend)
+            }
+        }
+
+        this.touch.backward.events.touchend = (_event) =>
+        {
+            const touches = [..._event.changedTouches]
+            const touch = touches.find((_touch) => _touch.identifier === this.touch.backward.touchIdentifier)
+
+            if(touch)
+            {
+                this.actions.up = false
+
+                this.touch.backward.$border.style.opacity = '0.25'
+
+                document.removeEventListener('touchend', this.touch.backward.events.touchend)
+            }
+        }
+
+        this.touch.backward.$element.addEventListener('touchstart', this.touch.backward.events.touchstart)
+
         // Reveal
         this.touch.reveal = () =>
         {
             this.touch.joystick.$element.style.opacity = 1
+            this.touch.backward.$element.style.opacity = 1
             this.touch.brake.$element.style.opacity = 1
+            this.touch.forward.$element.style.opacity = 1
             this.touch.boost.$element.style.opacity = 1
         }
     }
