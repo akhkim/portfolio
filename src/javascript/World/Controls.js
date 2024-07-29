@@ -55,23 +55,23 @@ export default class Controls extends EventEmitter
                 case 'ArrowUp':
                 case 'KeyW':
                     this.camera.pan.reset()
-                    this.actions.up = true
+                    this.actions.down = true
                     break
 
                 case 'ArrowRight':
                 case 'KeyD':
-                    this.actions.right = true
+                    this.actions.left = true
                     break
 
                 case 'ArrowDown':
                 case 'KeyS':
                     this.camera.pan.reset()
-                    this.actions.down = true
+                    this.actions.up = true
                     break
 
                 case 'ArrowLeft':
                 case 'KeyA':
-                    this.actions.left = true
+                    this.actions.right = true
                     break
 
                 case 'ControlRight':
@@ -97,22 +97,22 @@ export default class Controls extends EventEmitter
             {
                 case 'ArrowDown':
                 case 'KeyS':
-                    this.actions.down = false
+                    this.actions.up = false
                     break
 
                 case 'ArrowLeft':
                 case 'KeyA':
-                    this.actions.left = false
+                    this.actions.right = false
                     break
 
                 case 'ArrowUp':
                 case 'KeyW':
-                    this.actions.up = false
+                    this.actions.down = false
                     break
 
                 case 'ArrowRight':
                 case 'KeyD':
-                    this.actions.right = false
+                    this.actions.left = false
                     break
 
                 case 'ControlRight':
