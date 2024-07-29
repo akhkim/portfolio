@@ -229,26 +229,26 @@ export default class Physics
 
             this.car.vehicle.addToWorld(this.world)
 
-            // this.car.wheels.indexes = {}
+            this.car.wheels.indexes = {}
 
-            // this.car.wheels.indexes.frontLeft = 0
-            // this.car.wheels.indexes.frontRight = 1
-            // this.car.wheels.indexes.backLeft = 2
-            // this.car.wheels.indexes.backRight = 3
-            // this.car.wheels.bodies = []
+            this.car.wheels.indexes.frontLeft = 0
+            this.car.wheels.indexes.frontRight = 1
+            this.car.wheels.indexes.backLeft = 2
+            this.car.wheels.indexes.backRight = 3
+            this.car.wheels.bodies = []
 
-            // for(const _wheelInfos of this.car.vehicle.wheelInfos)
-            // {
-            //     const shape = new CANNON.Cylinder(_wheelInfos.radius, _wheelInfos.radius, this.car.wheels.options.height, 20)
-            //     const body = new CANNON.Body({ mass: this.car.options.wheelMass, material: this.materials.items.wheel })
-            //     const quaternion = new CANNON.Quaternion()
-            //     quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), Math.PI / 2)
+            for(const _wheelInfos of this.car.vehicle.wheelInfos)
+            {
+                const shape = new CANNON.Cylinder(_wheelInfos.radius, _wheelInfos.radius, this.car.wheels.options.height, 20)
+                const body = new CANNON.Body({ mass: this.car.options.wheelMass, material: this.materials.items.wheel })
+                const quaternion = new CANNON.Quaternion()
+                quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), Math.PI / 2)
 
-            //     body.type = CANNON.Body.KINEMATIC
+                body.type = CANNON.Body.KINEMATIC
 
-            //     body.addShape(shape, new CANNON.Vec3(), quaternion)
-            //     this.car.wheels.bodies.push(body)
-            // }
+                body.addShape(shape, new CANNON.Vec3(), quaternion)
+                this.car.wheels.bodies.push(body)
+            }
 
             /**
              * Model
