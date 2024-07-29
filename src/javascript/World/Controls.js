@@ -139,269 +139,175 @@ export default class Controls extends EventEmitter
     setTouch()
     {
         this.touch = {}
-
-        this.touch.left = {};
-        this.touch.left.$border = document.createElement('div');
-        this.touch.left.$border.style.position = 'absolute';
-        this.touch.left.$border.style.bottom = '20px';
-        this.touch.left.$border.style.left = '20px';
-        this.touch.left.$border.style.width = '60px';
-        this.touch.left.$border.style.height = '60px';
-        this.touch.left.$border.style.border = '2px solid #ffffff';
-        this.touch.left.$border.style.borderRadius = '10px';
-        this.touch.left.$border.style.boxSizing = 'border-box';
-        this.touch.left.$border.style.opacity = '0.25';
-        this.touch.left.$border.style.willChange = 'opacity';
-        document.body.appendChild(this.touch.left.$border);
-        
-        this.touch.left.$icon = document.createElement('div');
-        this.touch.left.$icon.style.position = 'absolute';
-        this.touch.left.$icon.style.top = 'calc(50% - 9px)';
-        this.touch.left.$icon.style.left = 'calc(50% - 11px)';
-        this.touch.left.$icon.style.width = '22px';
-        this.touch.left.$icon.style.height = '18px';
-        this.touch.left.$icon.style.backgroundImage = `url(${leftArrowIcon})`; // Replace with the appropriate icon
-        this.touch.left.$icon.style.backgroundSize = 'cover';
-        this.touch.left.$border.appendChild(this.touch.left.$icon);
-        
-        // Create right button
-        this.touch.right = {};
-        this.touch.right.$border = document.createElement('div');
-        this.touch.right.$border.style.position = 'absolute';
-        this.touch.right.$border.style.bottom = '20px';
-        this.touch.right.$border.style.right = '20px';
-        this.touch.right.$border.style.width = '60px';
-        this.touch.right.$border.style.height = '60px';
-        this.touch.right.$border.style.border = '2px solid #ffffff';
-        this.touch.right.$border.style.borderRadius = '10px';
-        this.touch.right.$border.style.boxSizing = 'border-box';
-        this.touch.right.$border.style.opacity = '0.25';
-        this.touch.right.$border.style.willChange = 'opacity';
-        document.body.appendChild(this.touch.right.$border);
-        
-        this.touch.right.$icon = document.createElement('div');
-        this.touch.right.$icon.style.position = 'absolute';
-        this.touch.right.$icon.style.top = 'calc(50% - 9px)';
-        this.touch.right.$icon.style.left = 'calc(50% - 11px)';
-        this.touch.right.$icon.style.width = '22px';
-        this.touch.right.$icon.style.height = '18px';
-        this.touch.right.$icon.style.backgroundImage = `url(${rightArrowIcon})`; // Replace with the appropriate icon
-        this.touch.right.$icon.style.backgroundSize = 'cover';
-        this.touch.right.$border.appendChild(this.touch.right.$icon);
-        
-        // Events
-        this.touch.left.events = {};
-        this.touch.left.touchIdentifier = null;
-        this.touch.left.events.touchstart = (_event) => {
-            _event.preventDefault();
-            const touch = _event.changedTouches[0];
-            if (touch) {
-                this.camera.pan.reset();
-                this.touch.left.touchIdentifier = touch.identifier;
-                // Add logic for left movement
-            }
-        };
-        this.touch.left.events.touchend = (_event) => {
-            _event.preventDefault();
-            const touch = _event.changedTouches[0];
-            if (touch && touch.identifier === this.touch.left.touchIdentifier) {
-                this.touch.left.touchIdentifier = null;
-                // Add logic to stop left movement
-            }
-        };
-        this.touch.left.$border.addEventListener('touchstart', this.touch.left.events.touchstart);
-        this.touch.left.$border.addEventListener('touchend', this.touch.left.events.touchend);
-        
-        this.touch.right.events = {};
-        this.touch.right.touchIdentifier = null;
-        this.touch.right.events.touchstart = (_event) => {
-            _event.preventDefault();
-            const touch = _event.changedTouches[0];
-            if (touch) {
-                this.camera.pan.reset();
-                this.touch.right.touchIdentifier = touch.identifier;
-                // Add logic for right movement
-            }
-        };
-        this.touch.right.events.touchend = (_event) => {
-            _event.preventDefault();
-            const touch = _event.changedTouches[0];
-            if (touch && touch.identifier === this.touch.right.touchIdentifier) {
-                this.touch.right.touchIdentifier = null;
-                // Add logic to stop right movement
-            }
-        };
-        this.touch.right.$border.addEventListener('touchstart', this.touch.right.events.touchstart);
-        this.touch.right.$border.addEventListener('touchend', this.touch.right.events.touchend);
             
         /**
          * Joystick
          */
-        // this.touch.joystick = {}
-        // this.touch.joystick.active = false
+        this.touch.joystick = {}
+        this.touch.joystick.active = false
 
-        // // Element
-        // this.touch.joystick.$element = document.createElement('div')
-        // this.touch.joystick.$element.style.userSelect = 'none'
-        // this.touch.joystick.$element.style.position = 'fixed'
-        // this.touch.joystick.$element.style.bottom = '10px'
-        // this.touch.joystick.$element.style.left = '10px'
-        // this.touch.joystick.$element.style.width = '170px'
-        // this.touch.joystick.$element.style.height = '170px'
-        // this.touch.joystick.$element.style.borderRadius = '50%'
-        // this.touch.joystick.$element.style.transition = 'opacity 0.3s 0.0s'
-        // this.touch.joystick.$element.style.willChange = 'opacity'
-        // this.touch.joystick.$element.style.opacity = '0'
-        // // this.touch.joystick.$element.style.backgroundColor = '#ff0000'
-        // document.body.appendChild(this.touch.joystick.$element)
+        // Element
+        this.touch.joystick.$element = document.createElement('div')
+        this.touch.joystick.$element.style.userSelect = 'none'
+        this.touch.joystick.$element.style.position = 'fixed'
+        this.touch.joystick.$element.style.bottom = '10px'
+        this.touch.joystick.$element.style.left = '10px'
+        this.touch.joystick.$element.style.width = '170px'
+        this.touch.joystick.$element.style.height = '30px'
+        this.touch.joystick.$element.style.borderRadius = '50%'
+        this.touch.joystick.$element.style.transition = 'opacity 0.3s 0.0s'
+        this.touch.joystick.$element.style.willChange = 'opacity'
+        this.touch.joystick.$element.style.opacity = '0'
+        // this.touch.joystick.$element.style.backgroundColor = '#ff0000'
+        document.body.appendChild(this.touch.joystick.$element)
 
-        // this.touch.joystick.$cursor = document.createElement('div')
-        // this.touch.joystick.$cursor.style.position = 'absolute'
-        // this.touch.joystick.$cursor.style.top = 'calc(50% - 30px)'
-        // this.touch.joystick.$cursor.style.left = 'calc(50% - 30px)'
-        // this.touch.joystick.$cursor.style.width = '60px'
-        // this.touch.joystick.$cursor.style.height = '60px'
-        // this.touch.joystick.$cursor.style.border = '2px solid #ffffff'
-        // this.touch.joystick.$cursor.style.borderRadius = '50%'
-        // this.touch.joystick.$cursor.style.boxSizing = 'border-box'
-        // this.touch.joystick.$cursor.style.pointerEvents = 'none'
-        // this.touch.joystick.$cursor.style.willChange = 'transform'
-        // this.touch.joystick.$element.appendChild(this.touch.joystick.$cursor)
+        this.touch.joystick.$cursor = document.createElement('div')
+        this.touch.joystick.$cursor.style.position = 'absolute'
+        this.touch.joystick.$cursor.style.top = 'calc(50% - 30px)'
+        this.touch.joystick.$cursor.style.left = 'calc(50% - 30px)'
+        this.touch.joystick.$cursor.style.width = '60px'
+        this.touch.joystick.$cursor.style.height = '60px'
+        this.touch.joystick.$cursor.style.border = '2px solid #ffffff'
+        this.touch.joystick.$cursor.style.borderRadius = '50%'
+        this.touch.joystick.$cursor.style.boxSizing = 'border-box'
+        this.touch.joystick.$cursor.style.pointerEvents = 'none'
+        this.touch.joystick.$cursor.style.willChange = 'transform'
+        this.touch.joystick.$element.appendChild(this.touch.joystick.$cursor)
 
-        // this.touch.joystick.$limit = document.createElement('div')
-        // this.touch.joystick.$limit.style.position = 'absolute'
-        // this.touch.joystick.$limit.style.top = 'calc(50% - 75px)'
-        // this.touch.joystick.$limit.style.left = 'calc(50% - 75px)'
-        // this.touch.joystick.$limit.style.width = '150px'
-        // this.touch.joystick.$limit.style.height = '150px'
-        // this.touch.joystick.$limit.style.border = '2px solid #ffffff'
-        // this.touch.joystick.$limit.style.borderRadius = '50%'
-        // this.touch.joystick.$limit.style.opacity = '0.25'
-        // this.touch.joystick.$limit.style.pointerEvents = 'none'
-        // this.touch.joystick.$limit.style.boxSizing = 'border-box'
-        // this.touch.joystick.$element.appendChild(this.touch.joystick.$limit)
+        this.touch.joystick.$limit = document.createElement('div')
+        this.touch.joystick.$limit.style.position = 'absolute'
+        this.touch.joystick.$limit.style.top = 'calc(50% - 75px)'
+        this.touch.joystick.$limit.style.left = 'calc(50% - 75px)'
+        this.touch.joystick.$limit.style.width = '150px'
+        this.touch.joystick.$limit.style.height = '150px'
+        this.touch.joystick.$limit.style.border = '2px solid #ffffff'
+        this.touch.joystick.$limit.style.borderRadius = '50%'
+        this.touch.joystick.$limit.style.opacity = '0.25'
+        this.touch.joystick.$limit.style.pointerEvents = 'none'
+        this.touch.joystick.$limit.style.boxSizing = 'border-box'
+        this.touch.joystick.$element.appendChild(this.touch.joystick.$limit)
 
-        // // Angle
-        // this.touch.joystick.angle = {}
+        // Angle
+        this.touch.joystick.angle = {}
 
-        // this.touch.joystick.angle.offset = Math.PI * 0.18
+        this.touch.joystick.angle.offset = Math.PI * 0.18
 
-        // this.touch.joystick.angle.center = {}
-        // this.touch.joystick.angle.center.x = 0
-        // this.touch.joystick.angle.center.y = 0
+        this.touch.joystick.angle.center = {}
+        this.touch.joystick.angle.center.x = 0
+        this.touch.joystick.angle.center.y = 0
 
-        // this.touch.joystick.angle.current = {}
-        // this.touch.joystick.angle.current.x = 0
-        // this.touch.joystick.angle.current.y = 0
+        this.touch.joystick.angle.current = {}
+        this.touch.joystick.angle.current.x = 0
+        this.touch.joystick.angle.current.y = 0
 
-        // this.touch.joystick.angle.originalValue = 0
-        // this.touch.joystick.angle.value = - Math.PI * 0.5
+        this.touch.joystick.angle.originalValue = 0
+        this.touch.joystick.angle.value = - Math.PI * 0.5
 
-        // // Resize
-        // this.touch.joystick.resize = () =>
-        // {
-        //     const boundings = this.touch.joystick.$element.getBoundingClientRect()
+        // Resize
+        this.touch.joystick.resize = () =>
+        {
+            const boundings = this.touch.joystick.$element.getBoundingClientRect()
 
-        //     this.touch.joystick.angle.center.x = boundings.left + boundings.width * 0.5
-        //     this.touch.joystick.angle.center.y = boundings.top + boundings.height * 0.5
-        // }
+            this.touch.joystick.angle.center.x = boundings.left + boundings.width * 0.5
+            this.touch.joystick.angle.center.y = boundings.top + boundings.height * 0.5
+        }
 
-        // this.sizes.on('resize', this.touch.joystick.resize)
-        // this.touch.joystick.resize()
+        this.sizes.on('resize', this.touch.joystick.resize)
+        this.touch.joystick.resize()
 
-        // // Time tick
-        // this.time.on('tick', () =>
-        // {
-        //     // Joystick active
-        //     if(this.touch.joystick.active)
-        //     {
-        //         // Calculate joystick angle
-        //         this.touch.joystick.angle.originalValue = - Math.atan2(
-        //             this.touch.joystick.angle.current.y - this.touch.joystick.angle.center.y,
-        //             this.touch.joystick.angle.current.x - this.touch.joystick.angle.center.x
-        //         )
-        //         this.touch.joystick.angle.value = this.touch.joystick.angle.originalValue + this.touch.joystick.angle.offset
+        // Time tick
+        this.time.on('tick', () =>
+        {
+            // Joystick active
+            if(this.touch.joystick.active)
+            {
+                // Calculate joystick angle
+                this.touch.joystick.angle.originalValue = - Math.atan2(
+                    this.touch.joystick.angle.current.y - this.touch.joystick.angle.center.y,
+                    this.touch.joystick.angle.current.x - this.touch.joystick.angle.center.x
+                )
+                this.touch.joystick.angle.value = this.touch.joystick.angle.originalValue + this.touch.joystick.angle.offset
 
-        //         // Update joystick
-        //         const distance = Math.hypot(this.touch.joystick.angle.current.y - this.touch.joystick.angle.center.y, this.touch.joystick.angle.current.x - this.touch.joystick.angle.center.x)
-        //         let radius = distance
-        //         if(radius > 20)
-        //         {
-        //             radius = 20 + Math.log(distance - 20) * 5
-        //         }
-        //         if(radius > 43)
-        //         {
-        //             radius = 43
-        //         }
-        //         const cursorX = Math.sin(this.touch.joystick.angle.originalValue + Math.PI * 0.5) * radius
-        //         const cursorY = Math.cos(this.touch.joystick.angle.originalValue + Math.PI * 0.5) * radius
-        //         this.touch.joystick.$cursor.style.transform = `translateX(${cursorX}px) translateY(${cursorY}px)`
-        //     }
-        // })
+                // Update joystick
+                const distance = Math.hypot(this.touch.joystick.angle.current.y - this.touch.joystick.angle.center.y, this.touch.joystick.angle.current.x - this.touch.joystick.angle.center.x)
+                let radius = distance
+                if(radius > 20)
+                {
+                    radius = 20 + Math.log(distance - 20) * 5
+                }
+                if(radius > 43)
+                {
+                    radius = 43
+                }
+                const cursorX = Math.sin(this.touch.joystick.angle.originalValue + Math.PI * 0.5) * radius
+                const cursorY = Math.cos(this.touch.joystick.angle.originalValue + Math.PI * 0.5) * radius
+                this.touch.joystick.$cursor.style.transform = `translateX(${cursorX}px) translateY(${cursorY}px)`
+            }
+        })
 
-        // // Events
-        // this.touch.joystick.events = {}
-        // this.touch.joystick.touchIdentifier = null
-        // this.touch.joystick.events.touchstart = (_event) =>
-        // {
-        //     _event.preventDefault()
+        // Events
+        this.touch.joystick.events = {}
+        this.touch.joystick.touchIdentifier = null
+        this.touch.joystick.events.touchstart = (_event) =>
+        {
+            _event.preventDefault()
 
-        //     const touch = _event.changedTouches[0]
+            const touch = _event.changedTouches[0]
 
-        //     if(touch)
-        //     {
-        //         this.touch.joystick.active = true
+            if(touch)
+            {
+                this.touch.joystick.active = true
 
-        //         this.touch.joystick.touchIdentifier = touch.identifier
+                this.touch.joystick.touchIdentifier = touch.identifier
 
-        //         this.touch.joystick.angle.current.x = touch.clientX
-        //         this.touch.joystick.angle.current.y = touch.clientY
+                this.touch.joystick.angle.current.x = touch.clientX
+                this.touch.joystick.angle.current.y = touch.clientY
 
-        //         this.touch.joystick.$limit.style.opacity = '0.5'
+                this.touch.joystick.$limit.style.opacity = '0.5'
 
-        //         document.addEventListener('touchend', this.touch.joystick.events.touchend)
-        //         document.addEventListener('touchmove', this.touch.joystick.events.touchmove, { passive: false })
+                document.addEventListener('touchend', this.touch.joystick.events.touchend)
+                document.addEventListener('touchmove', this.touch.joystick.events.touchmove, { passive: false })
 
-        //         this.trigger('joystickStart')
-        //     }
-        // }
+                this.trigger('joystickStart')
+            }
+        }
 
-        // this.touch.joystick.events.touchmove = (_event) =>
-        // {
-        //     _event.preventDefault()
+        this.touch.joystick.events.touchmove = (_event) =>
+        {
+            _event.preventDefault()
 
-        //     const touches = [..._event.changedTouches]
-        //     const touch = touches.find((_touch) => _touch.identifier === this.touch.joystick.touchIdentifier)
+            const touches = [..._event.changedTouches]
+            const touch = touches.find((_touch) => _touch.identifier === this.touch.joystick.touchIdentifier)
 
-        //     if(touch)
-        //     {
-        //         this.touch.joystick.angle.current.x = touch.clientX
-        //         this.touch.joystick.angle.current.y = touch.clientY
+            if(touch)
+            {
+                this.touch.joystick.angle.current.x = touch.clientX
+                this.touch.joystick.angle.current.y = touch.clientY
 
-        //         this.trigger('joystickMove')
-        //     }
-        // }
+                this.trigger('joystickMove')
+            }
+        }
 
-        // this.touch.joystick.events.touchend = (_event) =>
-        // {
-        //     const touches = [..._event.changedTouches]
-        //     const touch = touches.find((_touch) => _touch.identifier === this.touch.joystick.touchIdentifier)
+        this.touch.joystick.events.touchend = (_event) =>
+        {
+            const touches = [..._event.changedTouches]
+            const touch = touches.find((_touch) => _touch.identifier === this.touch.joystick.touchIdentifier)
 
-        //     if(touch)
-        //     {
-        //         this.touch.joystick.active = false
+            if(touch)
+            {
+                this.touch.joystick.active = false
 
-        //         this.touch.joystick.$limit.style.opacity = '0.25'
+                this.touch.joystick.$limit.style.opacity = '0.25'
 
-        //         this.touch.joystick.$cursor.style.transform = 'translateX(0px) translateY(0px)'
+                this.touch.joystick.$cursor.style.transform = 'translateX(0px) translateY(0px)'
 
-        //         document.removeEventListener('touchend', this.touch.joystick.events.touchend)
+                document.removeEventListener('touchend', this.touch.joystick.events.touchend)
 
-        //         this.trigger('joystickEnd')
-        //     }
-        // }
+                this.trigger('joystickEnd')
+            }
+        }
 
-        // this.touch.joystick.$element.addEventListener('touchstart', this.touch.joystick.events.touchstart, { passive: false })
+        this.touch.joystick.$element.addEventListener('touchstart', this.touch.joystick.events.touchstart, { passive: false })
 
         /**
          * Boost
