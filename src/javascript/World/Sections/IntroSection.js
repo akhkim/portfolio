@@ -232,8 +232,8 @@ export default class IntroSection
             soundName: 'brick'
         })
         this.objects.add({
-            base: this.resources.items.introCreativeBase.scene,
-            collision: this.resources.items.introCreativeCollision.scene,
+            base: this.resources.items.introAIBase.scene,
+            collision: this.resources.items.introAICollision.scene,
             offset: new THREE.Vector3(0, 17.5, 0),
             rotation: new THREE.Euler(0, 0, 0.25),
             shadow: { sizeX: 5, sizeY: 1.5, offsetZ: - 0.6, alpha: 0.3 },
