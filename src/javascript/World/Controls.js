@@ -222,12 +222,12 @@ export default class Controls extends EventEmitter
             if(this.touch.joystick.active)
             {
                 // Calculate joystick angle
-                this.touch.joystick.angle.originalValue = - Math.atan2(
+                this.touch.joystick.angle.originalValue = Math.atan2(
                     this.touch.joystick.angle.current.y - this.touch.joystick.angle.center.y,
                     this.touch.joystick.angle.current.x - this.touch.joystick.angle.center.x
                 )
                 this.touch.joystick.angle.value = this.touch.joystick.angle.originalValue + this.touch.joystick.angle.offset
-
+        
                 // Update joystick
                 const distance = Math.hypot(this.touch.joystick.angle.current.y - this.touch.joystick.angle.center.y, this.touch.joystick.angle.current.x - this.touch.joystick.angle.center.x)
                 let radius = distance
@@ -242,6 +242,23 @@ export default class Controls extends EventEmitter
                 const cursorX = Math.sin(this.touch.joystick.angle.originalValue + Math.PI * 0.5) * radius
                 const cursorY = Math.cos(this.touch.joystick.angle.originalValue + Math.PI * 0.5) * radius
                 this.touch.joystick.$cursor.style.transform = `translateX(${cursorX}px) translateY(${cursorY}px)`
+        
+                // Map joystick angle to actions
+                const angleThreshold = Math.PI / 4; // 45 degrees
+        
+                this.actions.up = this.touch.joystick.angle.value > Math.PI - angleThreshold || this.touch.joystick.angle.value < -Math.PI + angleThreshold;
+                this.actions.right = this.touch.joystick.angle.value > -angleThreshold && this.touch.joystick.angle.value < angleThreshold;
+                this.actions.down = this.touch.joystick.angle.value > -Math.PI + angleThreshold && this.touch.joystick.angle.value < Math.PI - angleThreshold;
+                this.actions.left = this.touch.joystick.angle.value > Math.PI / 2 - angleThreshold && this.touch.joystick.angle.value < Math.PI / 2 + angleThreshold ||
+                                    this.touch.joystick.angle.value < -Math.PI / 2 + angleThreshold && this.touch.joystick.angle.value > -Math.PI / 2 - angleThreshold;
+            }
+            else
+            {
+                // Reset actions when joystick is not active
+                this.actions.up = false;
+                this.actions.right = false;
+                this.actions.down = false;
+                this.actions.left = false;
             }
         })
 
