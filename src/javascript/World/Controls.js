@@ -55,33 +55,33 @@ export default class Controls extends EventEmitter
                 case 'ArrowUp':
                 case 'KeyW':
                     this.camera.pan.reset()
-                    this.actions.down = true
+                    this.actions.up = true
                     break
 
                 case 'ArrowRight':
                 case 'KeyD':
-                    this.actions.left = true
+                    this.actions.right = true
                     break
 
                 case 'ArrowDown':
                 case 'KeyS':
                     this.camera.pan.reset()
-                    this.actions.up = true
+                    this.actions.down = true
                     break
 
                 case 'ArrowLeft':
                 case 'KeyA':
-                    this.actions.right = true
+                    this.actions.left = true
                     break
 
-                case 'ControlRight':
                 case 'ControlLeft':
+                case 'ControlRight':
                 case 'Space':
                     this.actions.brake = true
                     break
 
-                case 'ShiftRight':
                 case 'ShiftLeft':
+                case 'ShiftRight':
                     this.actions.boost = true
                     break
 
@@ -95,34 +95,34 @@ export default class Controls extends EventEmitter
         {
             switch(_event.code)
             {
-                case 'ArrowDown':
-                case 'KeyS':
-                    this.actions.up = false
-                    break
-
-                case 'ArrowLeft':
-                case 'KeyA':
-                    this.actions.right = false
-                    break
-
                 case 'ArrowUp':
                 case 'KeyW':
-                    this.actions.down = false
+                    this.actions.up = false
                     break
 
                 case 'ArrowRight':
                 case 'KeyD':
+                    this.actions.right = false
+                    break
+
+                case 'ArrowDown':
+                case 'KeyS':
+                    this.actions.down = false
+                    break
+
+                case 'ArrowLeft':
+                case 'KeyA':
                     this.actions.left = false
                     break
 
-                case 'ControlRight':
                 case 'ControlLeft':
+                case 'ControlRight':
                 case 'Space':
                     this.actions.brake = false
                     break
 
-                case 'ShiftRight':
                 case 'ShiftLeft':
+                case 'ShiftRight':
                     this.actions.boost = false
                     break
 
@@ -139,7 +139,7 @@ export default class Controls extends EventEmitter
     setTouch()
     {
         this.touch = {}
-            
+
         /**
          * Joystick
          */
@@ -222,12 +222,12 @@ export default class Controls extends EventEmitter
             if(this.touch.joystick.active)
             {
                 // Calculate joystick angle
-                this.touch.joystick.angle.originalValue = Math.atan2(
+                this.touch.joystick.angle.originalValue = - Math.atan2(
                     this.touch.joystick.angle.current.y - this.touch.joystick.angle.center.y,
                     this.touch.joystick.angle.current.x - this.touch.joystick.angle.center.x
                 )
                 this.touch.joystick.angle.value = this.touch.joystick.angle.originalValue + this.touch.joystick.angle.offset
-        
+
                 // Update joystick
                 const distance = Math.hypot(this.touch.joystick.angle.current.y - this.touch.joystick.angle.center.y, this.touch.joystick.angle.current.x - this.touch.joystick.angle.center.x)
                 let radius = distance
@@ -242,23 +242,6 @@ export default class Controls extends EventEmitter
                 const cursorX = Math.sin(this.touch.joystick.angle.originalValue + Math.PI * 0.5) * radius
                 const cursorY = Math.cos(this.touch.joystick.angle.originalValue + Math.PI * 0.5) * radius
                 this.touch.joystick.$cursor.style.transform = `translateX(${cursorX}px) translateY(${cursorY}px)`
-        
-                // Map joystick angle to actions
-                const angleThreshold = Math.PI / 4; // 45 degrees
-        
-                this.actions.up = this.touch.joystick.angle.value > Math.PI - angleThreshold || this.touch.joystick.angle.value < -Math.PI + angleThreshold;
-                this.actions.right = this.touch.joystick.angle.value > -angleThreshold && this.touch.joystick.angle.value < angleThreshold;
-                this.actions.down = this.touch.joystick.angle.value > -Math.PI + angleThreshold && this.touch.joystick.angle.value < Math.PI - angleThreshold;
-                this.actions.left = this.touch.joystick.angle.value > Math.PI / 2 - angleThreshold && this.touch.joystick.angle.value < Math.PI / 2 + angleThreshold ||
-                                    this.touch.joystick.angle.value < -Math.PI / 2 + angleThreshold && this.touch.joystick.angle.value > -Math.PI / 2 - angleThreshold;
-            }
-            else
-            {
-                // Reset actions when joystick is not active
-                this.actions.up = false;
-                this.actions.right = false;
-                this.actions.down = false;
-                this.actions.left = false;
             }
         })
 
@@ -383,7 +366,7 @@ export default class Controls extends EventEmitter
 
                 this.touch.boost.touchIdentifier = touch.identifier
 
-                this.actions.down = true
+                this.actions.up = true
                 this.actions.boost = true
 
                 this.touch.boost.$border.style.opacity = '0.5'
@@ -399,7 +382,7 @@ export default class Controls extends EventEmitter
 
             if(touch)
             {
-                this.actions.down = false
+                this.actions.up = false
                 this.actions.boost = false
 
                 this.touch.boost.$border.style.opacity = '0.25'
@@ -467,7 +450,7 @@ export default class Controls extends EventEmitter
 
                 this.touch.forward.touchIdentifier = touch.identifier
 
-                this.actions.down = true
+                this.actions.up = true
 
                 this.touch.forward.$border.style.opacity = '0.5'
 
@@ -482,7 +465,7 @@ export default class Controls extends EventEmitter
 
             if(touch)
             {
-                this.actions.down = false
+                this.actions.up = false
 
                 this.touch.forward.$border.style.opacity = '0.25'
 
@@ -631,7 +614,7 @@ export default class Controls extends EventEmitter
 
                 this.touch.backward.touchIdentifier = touch.identifier
 
-                this.actions.up = true
+                this.actions.down = true
 
                 this.touch.backward.$border.style.opacity = '0.5'
 
@@ -646,7 +629,7 @@ export default class Controls extends EventEmitter
 
             if(touch)
             {
-                this.actions.up = false
+                this.actions.down = false
 
                 this.touch.backward.$border.style.opacity = '0.25'
 
