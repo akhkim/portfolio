@@ -284,19 +284,6 @@ export default class Controls extends EventEmitter
 
         this.touch.right.$element.addEventListener('touchstart', this.touch.right.events.touchstart)
 
-        // ... (keep the rest of the touch controls as they were)
-
-        // Reveal
-        this.touch.reveal = () =>
-        {
-            this.touch.left.$element.style.opacity = 1
-            this.touch.right.$element.style.opacity = 1
-            this.touch.backward.$element.style.opacity = 1
-            this.touch.brake.$element.style.opacity = 1
-            this.touch.forward.$element.style.opacity = 1
-            this.touch.boost.$element.style.opacity = 1
-        }
-
         /**
          * Boost
          */
@@ -313,7 +300,6 @@ export default class Controls extends EventEmitter
         this.touch.boost.$element.style.transition = 'opacity 0.3s 0.4s'
         this.touch.boost.$element.style.willChange = 'opacity'
         this.touch.boost.$element.style.opacity = '0'
-        // this.touch.boost.$element.style.backgroundColor = '#00ff00'
         document.body.appendChild(this.touch.boost.$element)
 
         this.touch.boost.$border = document.createElement('div')
@@ -397,7 +383,6 @@ export default class Controls extends EventEmitter
         this.touch.forward.$element.style.transition = 'opacity 0.3s 0.3s'
         this.touch.forward.$element.style.willChange = 'opacity'
         this.touch.forward.$element.style.opacity = '0'
-        // this.touch.forward.$element.style.backgroundColor = '#00ff00'
         document.body.appendChild(this.touch.forward.$element)
 
         this.touch.forward.$border = document.createElement('div')
