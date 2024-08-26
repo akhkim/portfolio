@@ -641,7 +641,8 @@ export default class Controls extends EventEmitter
         // Reveal
         this.touch.reveal = () =>
         {
-            this.touch.joystick.$element.style.opacity = 1
+            this.touch.left.$element.style.opacity = 1
+            this.touch.right.$element.style.opacity = 1
             this.touch.backward.$element.style.opacity = 1
             this.touch.brake.$element.style.opacity = 1
             this.touch.forward.$element.style.opacity = 1
