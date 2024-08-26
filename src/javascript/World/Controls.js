@@ -140,173 +140,173 @@ export default class Controls extends EventEmitter
     {
         this.touch = {}
 
-        /**
-         * Left
-         */
+        // /**
+        //  * Left
+        //  */
 
-        this.touch.left = {}
+        // this.touch.left = {}
 
-        // Element
-        this.touch.left.$element = document.createElement('div')
-        this.touch.left.$element.style.userSelect = 'none'
-        this.touch.left.$element.style.position = 'fixed'
-        this.touch.left.$element.style.bottom = 'calc(70px * 3 + 15px)'
-        this.touch.left.$element.style.left = '0px'
-        this.touch.left.$element.style.width = '95px'
-        this.touch.left.$element.style.height = '70px'
-        this.touch.left.$element.style.transition = 'opacity 0.3s 0.4s'
-        this.touch.left.$element.style.willChange = 'opacity'
-        this.touch.left.$element.style.opacity = '0'
-        // this.touch.left.$element.style.backgroundColor = '#00ff00'
-        document.body.appendChild(this.touch.left.$element)
+        // // Element
+        // this.touch.left.$element = document.createElement('div')
+        // this.touch.left.$element.style.userSelect = 'none'
+        // this.touch.left.$element.style.position = 'fixed'
+        // this.touch.left.$element.style.bottom = 'calc(70px * 3 + 15px)'
+        // this.touch.left.$element.style.left = '0px'
+        // this.touch.left.$element.style.width = '95px'
+        // this.touch.left.$element.style.height = '70px'
+        // this.touch.left.$element.style.transition = 'opacity 0.3s 0.4s'
+        // this.touch.left.$element.style.willChange = 'opacity'
+        // this.touch.left.$element.style.opacity = '0'
+        // // this.touch.left.$element.style.backgroundColor = '#00ff00'
+        // document.body.appendChild(this.touch.left.$element)
 
-        this.touch.left.$border = document.createElement('div')
-        this.touch.left.$border.style.position = 'absolute'
-        this.touch.left.$border.style.top = 'calc(50% - 30px)'
-        this.touch.left.$border.style.left = 'calc(50% - 30px)'
-        this.touch.left.$border.style.width = '60px'
-        this.touch.left.$border.style.height = '60px'
-        this.touch.left.$border.style.border = '2px solid #ffffff'
-        this.touch.left.$border.style.borderRadius = '10px'
-        this.touch.left.$border.style.boxSizing = 'border-box'
-        this.touch.left.$border.style.opacity = '0.25'
-        this.touch.left.$border.style.willChange = 'opacity'
-        this.touch.left.$element.appendChild(this.touch.left.$border)
+        // this.touch.left.$border = document.createElement('div')
+        // this.touch.left.$border.style.position = 'absolute'
+        // this.touch.left.$border.style.top = 'calc(50% - 30px)'
+        // this.touch.left.$border.style.left = 'calc(50% - 30px)'
+        // this.touch.left.$border.style.width = '60px'
+        // this.touch.left.$border.style.height = '60px'
+        // this.touch.left.$border.style.border = '2px solid #ffffff'
+        // this.touch.left.$border.style.borderRadius = '10px'
+        // this.touch.left.$border.style.boxSizing = 'border-box'
+        // this.touch.left.$border.style.opacity = '0.25'
+        // this.touch.left.$border.style.willChange = 'opacity'
+        // this.touch.left.$element.appendChild(this.touch.left.$border)
 
-        this.touch.left.$icon = document.createElement('div')
-        this.touch.left.$icon.style.position = 'absolute'
-        this.touch.left.$icon.style.top = 'calc(50% - 13px)'
-        this.touch.left.$icon.style.left = 'calc(50% - 11px)'
-        this.touch.left.$icon.style.width = '22px'
-        this.touch.left.$icon.style.height = '26px'
-        this.touch.left.$icon.style.backgroundImage = `url(${mobileDoubleTriangle})`
-        this.touch.backward.$icon.style.transform = 'rotate(270deg)'
-        this.touch.left.$icon.style.backgroundSize = 'cover'
-        this.touch.left.$element.appendChild(this.touch.left.$icon)
+        // this.touch.left.$icon = document.createElement('div')
+        // this.touch.left.$icon.style.position = 'absolute'
+        // this.touch.left.$icon.style.top = 'calc(50% - 13px)'
+        // this.touch.left.$icon.style.left = 'calc(50% - 11px)'
+        // this.touch.left.$icon.style.width = '22px'
+        // this.touch.left.$icon.style.height = '26px'
+        // this.touch.left.$icon.style.backgroundImage = `url(${mobileTriangle})`
+        // this.touch.backward.$icon.style.transform = 'rotate(270deg)'
+        // this.touch.left.$icon.style.backgroundSize = 'cover'
+        // this.touch.left.$element.appendChild(this.touch.left.$icon)
 
-        // Events
-        this.touch.left.events = {}
-        this.touch.left.touchIdentifier = null
-        this.touch.left.events.touchstart = (_event) =>
-        {
-            _event.preventDefault()
+        // // Events
+        // this.touch.left.events = {}
+        // this.touch.left.touchIdentifier = null
+        // this.touch.left.events.touchstart = (_event) =>
+        // {
+        //     _event.preventDefault()
 
-            const touch = _event.changedTouches[0]
+        //     const touch = _event.changedTouches[0]
 
-            if(touch)
-            {
-                this.camera.pan.reset()
+        //     if(touch)
+        //     {
+        //         this.camera.pan.reset()
 
-                this.touch.left.touchIdentifier = touch.identifier
+        //         this.touch.left.touchIdentifier = touch.identifier
 
-                this.actions.left = true
+        //         this.actions.left = true
 
-                this.touch.left.$border.style.opacity = '0.5'
+        //         this.touch.left.$border.style.opacity = '0.5'
 
-                document.addEventListener('touchend', this.touch.left.events.touchend)
-            }
-        }
+        //         document.addEventListener('touchend', this.touch.left.events.touchend)
+        //     }
+        // }
 
-        this.touch.left.events.touchend = (_event) =>
-        {
-            const touches = [..._event.changedTouches]
-            const touch = touches.find((_touch) => _touch.identifier === this.touch.left.touchIdentifier)
+        // this.touch.left.events.touchend = (_event) =>
+        // {
+        //     const touches = [..._event.changedTouches]
+        //     const touch = touches.find((_touch) => _touch.identifier === this.touch.left.touchIdentifier)
 
-            if(touch)
-            {
-                this.actions.left = false
+        //     if(touch)
+        //     {
+        //         this.actions.left = false
 
-                this.touch.left.$border.style.opacity = '0.25'
+        //         this.touch.left.$border.style.opacity = '0.25'
 
-                document.removeEventListener('touchend', this.touch.left.events.touchend)
-            }
-        }
+        //         document.removeEventListener('touchend', this.touch.left.events.touchend)
+        //     }
+        // }
 
-        this.touch.left.$element.addEventListener('touchstart', this.touch.left.events.touchstart)
+        // this.touch.left.$element.addEventListener('touchstart', this.touch.left.events.touchstart)
 
-        /**
-         * Right
-         */
+        // /**
+        //  * Right
+        //  */
 
-        this.touch.right = {}
+        // this.touch.right = {}
 
-        // Element
-        this.touch.right.$element = document.createElement('div')
-        this.touch.right.$element.style.userSelect = 'none'
-        this.touch.right.$element.style.position = 'fixed'
-        this.touch.right.$element.style.bottom = 'calc(70px * 3 + 15px)'
-        this.touch.right.$element.style.left = '95px'
-        this.touch.right.$element.style.width = '95px'
-        this.touch.right.$element.style.height = '70px'
-        this.touch.right.$element.style.transition = 'opacity 0.3s 0.4s'
-        this.touch.right.$element.style.willChange = 'opacity'
-        this.touch.right.$element.style.opacity = '0'
-        // this.touch.right.$element.style.backgroundColor = '#00ff00'
-        document.body.appendChild(this.touch.right.$element)
+        // // Element
+        // this.touch.right.$element = document.createElement('div')
+        // this.touch.right.$element.style.userSelect = 'none'
+        // this.touch.right.$element.style.position = 'fixed'
+        // this.touch.right.$element.style.bottom = 'calc(70px * 3 + 15px)'
+        // this.touch.right.$element.style.left = '95px'
+        // this.touch.right.$element.style.width = '95px'
+        // this.touch.right.$element.style.height = '70px'
+        // this.touch.right.$element.style.transition = 'opacity 0.3s 0.4s'
+        // this.touch.right.$element.style.willChange = 'opacity'
+        // this.touch.right.$element.style.opacity = '0'
+        // // this.touch.right.$element.style.backgroundColor = '#00ff00'
+        // document.body.appendChild(this.touch.right.$element)
 
-        this.touch.right.$border = document.createElement('div')
-        this.touch.right.$border.style.position = 'absolute'
-        this.touch.right.$border.style.top = 'calc(50% - 30px)'
-        this.touch.right.$border.style.left = 'calc(50% - 30px)'
-        this.touch.right.$border.style.width = '60px'
-        this.touch.right.$border.style.height = '60px'
-        this.touch.right.$border.style.border = '2px solid #ffffff'
-        this.touch.right.$border.style.borderRadius = '10px'
-        this.touch.right.$border.style.boxSizing = 'border-box'
-        this.touch.right.$border.style.opacity = '0.25'
-        this.touch.right.$border.style.willChange = 'opacity'
-        this.touch.right.$element.appendChild(this.touch.right.$border)
+        // this.touch.right.$border = document.createElement('div')
+        // this.touch.right.$border.style.position = 'absolute'
+        // this.touch.right.$border.style.top = 'calc(50% - 30px)'
+        // this.touch.right.$border.style.left = 'calc(50% - 30px)'
+        // this.touch.right.$border.style.width = '60px'
+        // this.touch.right.$border.style.height = '60px'
+        // this.touch.right.$border.style.border = '2px solid #ffffff'
+        // this.touch.right.$border.style.borderRadius = '10px'
+        // this.touch.right.$border.style.boxSizing = 'border-box'
+        // this.touch.right.$border.style.opacity = '0.25'
+        // this.touch.right.$border.style.willChange = 'opacity'
+        // this.touch.right.$element.appendChild(this.touch.right.$border)
 
-        this.touch.right.$icon = document.createElement('div')
-        this.touch.right.$icon.style.position = 'absolute'
-        this.touch.right.$icon.style.top = 'calc(50% - 13px)'
-        this.touch.right.$icon.style.right = 'calc(50% - 11px)'
-        this.touch.right.$icon.style.width = '22px'
-        this.touch.right.$icon.style.height = '26px'
-        this.touch.right.$icon.style.backgroundImage = `url(${mobileDoubleTriangle})`
-        this.touch.right.$icon.style.transform = 'rotate(90deg)'
-        this.touch.right.$icon.style.backgroundSize = 'cover'
-        this.touch.right.$element.appendChild(this.touch.right.$icon)
+        // this.touch.right.$icon = document.createElement('div')
+        // this.touch.right.$icon.style.position = 'absolute'
+        // this.touch.right.$icon.style.top = 'calc(50% - 13px)'
+        // this.touch.right.$icon.style.right = 'calc(50% - 11px)'
+        // this.touch.right.$icon.style.width = '22px'
+        // this.touch.right.$icon.style.height = '26px'
+        // this.touch.right.$icon.style.backgroundImage = `url(${mobileTriangle})`
+        // this.touch.right.$icon.style.transform = 'rotate(90deg)'
+        // this.touch.right.$icon.style.backgroundSize = 'cover'
+        // this.touch.right.$element.appendChild(this.touch.right.$icon)
 
-        // Events
-        this.touch.right.events = {}
-        this.touch.right.touchIdentifier = null
-        this.touch.right.events.touchstart = (_event) =>
-        {
-            _event.preventDefault()
+        // // Events
+        // this.touch.right.events = {}
+        // this.touch.right.touchIdentifier = null
+        // this.touch.right.events.touchstart = (_event) =>
+        // {
+        //     _event.preventDefault()
 
-            const touch = _event.changedTouches[0]
+        //     const touch = _event.changedTouches[0]
 
-            if(touch)
-            {
-                this.camera.pan.reset()
+        //     if(touch)
+        //     {
+        //         this.camera.pan.reset()
 
-                this.touch.right.touchIdentifier = touch.identifier
+        //         this.touch.right.touchIdentifier = touch.identifier
 
-                this.actions.right = true
+        //         this.actions.right = true
 
-                this.touch.right.$border.style.opacity = '0.5'
+        //         this.touch.right.$border.style.opacity = '0.5'
 
-                document.addEventListener('touchend', this.touch.right.events.touchend)
-            }
-        }
+        //         document.addEventListener('touchend', this.touch.right.events.touchend)
+        //     }
+        // }
 
-        this.touch.right.events.touchend = (_event) =>
-        {
-            const touches = [..._event.changedTouches]
-            const touch = touches.find((_touch) => _touch.identifier === this.touch.right.touchIdentifier)
+        // this.touch.right.events.touchend = (_event) =>
+        // {
+        //     const touches = [..._event.changedTouches]
+        //     const touch = touches.find((_touch) => _touch.identifier === this.touch.right.touchIdentifier)
 
-            if(touch)
-            {
-                this.actions.right = false
+        //     if(touch)
+        //     {
+        //         this.actions.right = false
 
-                this.touch.right.$border.style.opacity = '0.25'
+        //         this.touch.right.$border.style.opacity = '0.25'
 
-                document.removeEventListener('touchend', this.touch.right.events.touchend)
-            }
-        }
+        //         document.removeEventListener('touchend', this.touch.right.events.touchend)
+        //     }
+        // }
 
-        this.touch.right.$element.addEventListener('touchstart', this.touch.right.events.touchstart)
+        // this.touch.right.$element.addEventListener('touchstart', this.touch.right.events.touchstart)
 
         /**
          * Boost
