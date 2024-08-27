@@ -454,57 +454,54 @@ export default class Physics
             /**
              * Steering
              */
-            if(this.controls.touch)
-            {
-                const steerStrength = this.time.delta * this.car.options.controlsSteeringSpeed
+            const steerStrength = this.time.delta * this.car.options.controlsSteeringSpeed
 
-                // Steer right
-                if(this.controls.actions.right)
+            // Steer right
+            if(this.controls.actions.right)
+            {
+                this.car.steering += steerStrength
+            }
+            // Steer left
+            else if(this.controls.actions.left)
+            {
+                this.car.steering -= steerStrength
+            }
+            // Steer center
+            else
+            {
+                if(Math.abs(this.car.steering) > steerStrength)
                 {
-                    this.car.steering += steerStrength
+                    this.car.steering -= steerStrength * Math.sign(this.car.steering)
                 }
-                // Steer left
-                else if(this.controls.actions.left)
-                {
-                    this.car.steering -= steerStrength
-                }
-                // Steer center
                 else
                 {
-                    if(Math.abs(this.car.steering) > steerStrength)
-                    {
-                        this.car.steering -= steerStrength * Math.sign(this.car.steering)
-                    }
-                    else
-                    {
-                        this.car.steering = 0
-                    }
-                }
-
-                // Clamp steer
-                if(Math.abs(this.car.steering) > this.car.options.controlsSteeringMax)
-                {
-                    this.car.steering = Math.sign(this.car.steering) * this.car.options.controlsSteeringMax
+                    this.car.steering = 0
                 }
             }
-
+            
+            // Clamp steer
+            if(Math.abs(this.car.steering) > this.car.options.controlsSteeringMax)
+            {
+                this.car.steering = Math.sign(this.car.steering) * this.car.options.controlsSteeringMax
+            }
+            
             // Update wheels
             this.car.vehicle.setSteeringValue(- this.car.steering, this.car.wheels.indexes.frontLeft)
             this.car.vehicle.setSteeringValue(- this.car.steering, this.car.wheels.indexes.frontRight)
-
+            
             if(this.car.options.controlsSteeringQuad)
             {
                 this.car.vehicle.setSteeringValue(this.car.steering, this.car.wheels.indexes.backLeft)
                 this.car.vehicle.setSteeringValue(this.car.steering, this.car.wheels.indexes.backRight)
             }
-
+            
             /**
              * Accelerate
              */
             const accelerationSpeed = this.controls.actions.boost ? this.car.options.controlsAcceleratingSpeedBoost : this.car.options.controlsAcceleratingSpeed
             const accelerateStrength = 10 * accelerationSpeed
             const controlsAcceleratinMaxSpeed = this.controls.actions.boost ? this.car.options.controlsAcceleratinMaxSpeedBoost : this.car.options.controlsAcceleratinMaxSpeed
-
+            
             // Accelerate up
             if(this.controls.actions.up)
             {
@@ -517,7 +514,7 @@ export default class Physics
                     this.car.accelerating = 0
                 }
             }
-
+            
             // Accelerate Down
             else if(this.controls.actions.down)
             {
@@ -534,16 +531,16 @@ export default class Physics
             {
                 this.car.accelerating = 0
             }
-
+            
             this.car.vehicle.applyEngineForce(- this.car.accelerating, this.car.wheels.indexes.backLeft)
             this.car.vehicle.applyEngineForce(- this.car.accelerating, this.car.wheels.indexes.backRight)
-
+            
             if(this.car.options.controlsSteeringQuad)
             {
                 this.car.vehicle.applyEngineForce(- this.car.accelerating, this.car.wheels.indexes.frontLeft)
                 this.car.vehicle.applyEngineForce(- this.car.accelerating, this.car.wheels.indexes.frontRight)
             }
-
+            
             /**
              * Brake
              */
