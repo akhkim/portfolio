@@ -140,6 +140,9 @@ export default class Controls extends EventEmitter
     {
         this.touch = {}
 
+        this.touch.joystick = {}
+        this.touch.joystick.active = false
+
         /**
          * Left
          */
@@ -204,6 +207,8 @@ export default class Controls extends EventEmitter
                 this.touch.left.$border.style.opacity = '0.5'
 
                 document.addEventListener('touchend', this.touch.left.events.touchend)
+
+                this.trigger('joystickStart')
             }
         }
 
@@ -219,6 +224,8 @@ export default class Controls extends EventEmitter
                 this.touch.left.$border.style.opacity = '0.25'
 
                 document.removeEventListener('touchend', this.touch.left.events.touchend)
+                
+                this.trigger('joystickEnd')
             }
         }
 
