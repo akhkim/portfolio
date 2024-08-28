@@ -140,9 +140,6 @@ export default class Controls extends EventEmitter
     {
         this.touch = {}
 
-        this.touch.joystick = {}
-        this.touch.joystick.active = false
-
         /**
          * Left
          */
@@ -207,8 +204,6 @@ export default class Controls extends EventEmitter
                 this.touch.left.$border.style.opacity = '0.5'
 
                 document.addEventListener('touchend', this.touch.left.events.touchend)
-
-                this.trigger('joystickStart')
             }
         }
 
@@ -224,8 +219,6 @@ export default class Controls extends EventEmitter
                 this.touch.left.$border.style.opacity = '0.25'
 
                 document.removeEventListener('touchend', this.touch.left.events.touchend)
-                
-                this.trigger('joystickEnd')
             }
         }
 
@@ -242,7 +235,7 @@ export default class Controls extends EventEmitter
         this.touch.right.$element.style.userSelect = 'none'
         this.touch.right.$element.style.position = 'fixed'
         this.touch.right.$element.style.bottom = 'calc(70px * 3 + 15px)'
-        this.touch.right.$element.style.right = '95px'
+        this.touch.right.$element.style.right = '0px'
         this.touch.right.$element.style.width = '95px'
         this.touch.right.$element.style.height = '70px'
         this.touch.right.$element.style.transition = 'opacity 0.3s 0.4s'
