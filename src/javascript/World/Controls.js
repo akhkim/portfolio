@@ -17,7 +17,6 @@ export default class Controls extends EventEmitter
 
         this.setActions()
         this.setKeyboard()
-        this.setTouch()
     }
 
     setActions()
@@ -195,7 +194,7 @@ export default class Controls extends EventEmitter
             {
                 this.touch.left.touchIdentifier = touch.identifier
 
-                this.actions.left = true
+                this.actions.right = true
 
                 this.touch.left.$border.style.opacity = '0.5'
 
@@ -210,7 +209,7 @@ export default class Controls extends EventEmitter
 
             if(touch)
             {
-                this.actions.left = false
+                this.actions.right = false
 
                 this.touch.left.$border.style.opacity = '0.25'
 
@@ -218,7 +217,7 @@ export default class Controls extends EventEmitter
             }
         }
 
-        this.touch.left.$element.addEventListener('touchstart', this.touch.left.events.touchstart)
+        this.touch.left.$element.addEventListener('touchstart', this.touch.left.events.touchstart, { passive: false})
 
         /**
          * Right Button
@@ -274,7 +273,7 @@ export default class Controls extends EventEmitter
             {
                 this.touch.right.touchIdentifier = touch.identifier
 
-                this.actions.right = true
+                this.actions.left = true
 
                 this.touch.right.$border.style.opacity = '0.5'
 
@@ -289,7 +288,7 @@ export default class Controls extends EventEmitter
 
             if(touch)
             {
-                this.actions.right = false
+                this.actions.left = false
 
                 this.touch.right.$border.style.opacity = '0.25'
 
