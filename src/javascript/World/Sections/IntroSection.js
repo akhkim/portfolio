@@ -244,7 +244,7 @@ export default class IntroSection
         this.objects.add({
             base: this.resources.items.introDevBase.scene,
             collision: this.resources.items.introDevCollision.scene,
-            offset: new THREE.Vector3(0, 17.5, 0.3),
+            offset: new THREE.Vector3(0, 17.5, 0.5),
             rotation: new THREE.Euler(0, 0, 0),
             shadow: { sizeX: 2.5, sizeY: 1.5, offsetZ: - 0.6, alpha: 0.3 },
             mass: 1,
