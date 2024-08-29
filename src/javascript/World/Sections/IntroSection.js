@@ -236,7 +236,7 @@ export default class IntroSection
             collision: this.resources.items.introAICollision.scene,
             offset: new THREE.Vector3(0, 17.5, 1),
             rotation: new THREE.Euler(0, 0, 0),
-            shadow: { sizeX: 1.5, sizeY: 1.5, offsetZ: - 0.6, alpha: 0.3 },
+            shadow: { sizeX: 1.25, sizeY: 1.5, offsetZ: - 0.6, alpha: 0.3 },
             mass: 1,
             sleep: false,
             soundName: 'brick'
@@ -246,7 +246,7 @@ export default class IntroSection
             collision: this.resources.items.introDevCollision.scene,
             offset: new THREE.Vector3(0.15, 17.5, 0.75),
             rotation: new THREE.Euler(0, 0, 0),
-            shadow: { sizeX: 2.5, sizeY: 1.5, offsetZ: - 0.6, alpha: 0.3 },
+            shadow: { sizeX: 2.25, sizeY: 1.5, offsetZ: - 0.6, alpha: 0.3 },
             mass: 1,
             soundName: 'brick'
         })
