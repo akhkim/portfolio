@@ -217,7 +217,7 @@ export default class Controls extends EventEmitter
             }
         }
 
-        this.touch.left.$element.addEventListener('touchstart', this.touch.left.events.touchstart, { passive: false})
+        this.touch.left.$element.addEventListener('touchstart', this.touch.left.events.touchstart, { passive: false })
 
         /**
          * Right Button
