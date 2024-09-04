@@ -356,7 +356,7 @@ export default class Controls extends EventEmitter
 
                 this.touch.boost.touchIdentifier = touch.identifier
 
-                this.actions.up = true
+                this.actions.down = true
                 this.actions.boost = true
 
                 this.touch.boost.$border.style.opacity = '0.5'
@@ -372,7 +372,7 @@ export default class Controls extends EventEmitter
 
             if(touch)
             {
-                this.actions.up = false
+                this.actions.down = false
                 this.actions.boost = false
 
                 this.touch.boost.$border.style.opacity = '0.25'
