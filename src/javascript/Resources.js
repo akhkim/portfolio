@@ -80,7 +80,7 @@ export default class Resources extends EventEmitter
             { name: 'crossroadsStaticCollision', source: './models/crossroads/static/collision.glb' },
             { name: 'crossroadsStaticFloorShadow', source: './models/crossroads/static/floorShadow.png', type: 'texture' },
 
-            // Crane default
+            // Crane
             { name: 'craneDefaultChassis', source: './models/crane/default/chassis.glb' },
 
             // Project
