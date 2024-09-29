@@ -161,7 +161,14 @@ export default class Project
 
                     case 'python':
                         base = this.resources.items.projectsDistinctionsPythonBase.scene
-                        collision = this.resources.items.projectsDistinctionsFWACollision.scene
+                        collision = this.resources.items.projectsDistinctionsPythonCollision.scene
+                        shadowSizeX = 1
+                        shadowSizeY = 0.5
+                        break
+
+                    case 'opencv':
+                        base = this.resources.items.projectsDistinctionsOpenCVBase.scene
+                        collision = this.resources.items.projectsDistinctionsOpenCVCollision.scene
                         shadowSizeX = 1
                         shadowSizeY = 0.5
                         break

@@ -117,7 +117,7 @@ export default class ProjectsSection
                 distinctions:
                 [
                     { type: 'python', x: 3.95, y: 4.15 },
-                    { type: 'fwa', x: 5.6, y: 4.15 }
+                    { type: 'opencv', x: 5.6, y: 4.15 }
                 ]
             },
             // {
