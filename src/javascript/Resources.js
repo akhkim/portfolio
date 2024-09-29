@@ -103,7 +103,7 @@ export default class Resources extends EventEmitter
             { name: 'projectsBabelFloor', source: './models/projects/babel/floorTexture.png', type: 'texture' },
             { name: 'projectsMadboxFloor', source: './models/projects/madbox/floorTexture.png', type: 'texture' },
             { name: 'projectsScoutFloor', source: './models/projects/scout/floorTexture.png', type: 'texture' },
-            { name: 'projectsChartogneFloor', source: './models/projects/chartogne/floorTexture.png', type: 'texture' },
+            { name: 'projectsTerrariaFloor', source: './models/projects/terraria/floorTexture.png', type: 'texture' },
             // { name: 'projectsZenlyFloor', source: './models/projects/zenly/floorTexture.png', type: 'texture' },
             { name: 'projectsCitrixRedbullFloor', source: './models/projects/citrixRedbull/floorTexture.png', type: 'texture' },
             { name: 'projectsPriorHoldingsFloor', source: './models/projects/priorHoldings/floorTexture.png', type: 'texture' },

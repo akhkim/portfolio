@@ -98,11 +98,10 @@ export default class ProjectsSection
                 name: 'Terraria Mining Bot',
                 imageSources:
                 [
-                    './models/projects/chartogne/slideA.webp',
-                    './models/projects/chartogne/slideB.webp',
-                    './models/projects/chartogne/slideC.webp'
+                    './models/projects/terraria/slideA.png',
+                    './models/projects/terraria/slideB.png',
                 ],
-                floorTexture: this.resources.items.projectsChartogneFloorTexture,
+                floorTexture: this.resources.items.projectsTerrariaFloorTexture,
                 link:
                 {
                     href: 'https://github.com/akhkim/terraria-mining-bot',
