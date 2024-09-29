@@ -71,7 +71,7 @@ export default class ProjectsSection
     {
         this.list = [
             {
-                name: 'Three js journey',
+                name: 'Three.js Journey',
                 imageSources:
                 [
                     './models/projects/babel/slideA.png',
