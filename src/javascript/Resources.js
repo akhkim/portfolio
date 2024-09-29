@@ -96,7 +96,7 @@ export default class Resources extends EventEmitter
             { name: 'projectsDistinctionsCSSDABase', source: './models/projects/distinctions/cssda/base.glb' },
             { name: 'projectsDistinctionsCSSDACollision', source: './models/projects/distinctions/cssda/collision.glb' },
             { name: 'projectsDistinctionsPythonBase', source: './models/projects/distinctions/python/base.glb' },
-            { name: 'projectsDistinctionsPythonCollision', source: './models/projects/distinctions/python/collision.glb' }
+            { name: 'projectsDistinctionsPythonCollision', source: './models/projects/distinctions/python/collision.glb' },
 
             { name: 'projectsLuniFloor', source: './models/projects/luni/floorTexture.webp', type: 'texture' },
             { name: 'projectsBonhomme10ansFloor', source: './models/projects/bonhomme10ans/floorTexture.webp', type: 'texture' },
