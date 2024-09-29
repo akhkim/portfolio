@@ -447,7 +447,7 @@ export default class ProjectsSection
             })
         }
 
-        // Save
+        // Save 
         this.items.push(project)
     }
 }
