@@ -71,7 +71,7 @@ export default class ProjectsSection
     {
         this.list = [
             {
-                name: 'Babel',
+                name: 'Three js journey',
                 imageSources:
                 [
                     './models/projects/babel/slideA.png',
@@ -95,7 +95,7 @@ export default class ProjectsSection
                 ]
             },
             {
-                name: 'Terraria Mining Bot',
+                name: 'Chartogne Taillet',
                 imageSources:
                 [
                     './models/projects/chartogne/slideA.jpg',
@@ -121,33 +121,33 @@ export default class ProjectsSection
                     { type: 'cssda', x: 7.2, y: 4.15 }
                 ]
             },
-            // {
-            //     name: 'Bonhomme | 10 ans',
-            //     imageSources:
-            //     [
-            //         './models/projects/bonhomme10ans/slideA.webp',
-            //         './models/projects/bonhomme10ans/slideB.webp',
-            //         './models/projects/bonhomme10ans/slideC.webp',
-            //         './models/projects/bonhomme10ans/slideD.webp'
-            //     ],
-            //     floorTexture: this.resources.items.projectsBonhomme10ansFloorTexture,
-            //     link:
-            //     {
-            //         href: 'https://anniversary.bonhommeparis.com/',
-            //         x: - 4.8,
-            //         y: - 2,
-            //         halfExtents:
-            //         {
-            //             x: 3.2,
-            //             y: 1.5
-            //         }
-            //     },
-            //     distinctions:
-            //     [
-            //         { type: 'python', x: 3.95, y: 4.15 },
-            //         { type: 'fwa', x: 5.6, y: 4.15 },
-            //     ]
-            // },
+            {
+                name: 'Bonhomme | 10 ans',
+                imageSources:
+                [
+                    './models/projects/bonhomme10ans/slideA.webp',
+                    './models/projects/bonhomme10ans/slideB.webp',
+                    './models/projects/bonhomme10ans/slideC.webp',
+                    './models/projects/bonhomme10ans/slideD.webp'
+                ],
+                floorTexture: this.resources.items.projectsBonhomme10ansFloorTexture,
+                link:
+                {
+                    href: 'https://anniversary.bonhommeparis.com/',
+                    x: - 4.8,
+                    y: - 2,
+                    halfExtents:
+                    {
+                        x: 3.2,
+                        y: 1.5
+                    }
+                },
+                distinctions:
+                [
+                    { type: 'python', x: 3.95, y: 4.15 },
+                    { type: 'fwa', x: 5.6, y: 4.15 },
+                ]
+            },
             // {
             //     name: 'Luni.app',
             //     imageSources:
