@@ -95,12 +95,12 @@ export default class ProjectsSection
                 ]
             },
             {
-                name: 'Chartogne Taillet',
+                name: 'Terraria Mining Bot',
                 imageSources:
                 [
-                    './models/projects/chartogne/slideA.jpg',
-                    './models/projects/chartogne/slideB.jpg',
-                    './models/projects/chartogne/slideC.jpg'
+                    './models/projects/chartogne/slideA.webp',
+                    './models/projects/chartogne/slideB.webp',
+                    './models/projects/chartogne/slideC.webp'
                 ],
                 floorTexture: this.resources.items.projectsChartogneFloorTexture,
                 link:
@@ -117,8 +117,7 @@ export default class ProjectsSection
                 distinctions:
                 [
                     { type: 'python', x: 3.95, y: 4.15 },
-                    { type: 'fwa', x: 5.6, y: 4.15 },
-                    { type: 'cssda', x: 7.2, y: 4.15 }
+                    { type: 'fwa', x: 5.6, y: 4.15 }
                 ]
             },
             // {
