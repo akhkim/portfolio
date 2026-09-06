@@ -98,18 +98,8 @@ export default class Resources extends EventEmitter
             { name: 'projectsDistinctionsPythonBase', source: './models/projects/distinctions/python/base.glb' },
             { name: 'projectsDistinctionsPythonCollision', source: './models/projects/distinctions/python/collision.glb' },
 
-            { name: 'projectsLuniFloor', source: './models/projects/luni/floorTexture.webp', type: 'texture' },
-            { name: 'projectsBonhomme10ansFloor', source: './models/projects/bonhomme10ans/floorTexture.webp', type: 'texture' },
-            { name: 'projectsBabelFloor', source: './models/projects/babel/floorTexture.png', type: 'texture' },
-            { name: 'projectsMadboxFloor', source: './models/projects/madbox/floorTexture.png', type: 'texture' },
-            { name: 'projectsScoutFloor', source: './models/projects/scout/floorTexture.png', type: 'texture' },
-            { name: 'projectsTerrariaFloor', source: './models/projects/terraria/floorTexture.png', type: 'texture' },
-            // { name: 'projectsZenlyFloor', source: './models/projects/zenly/floorTexture.png', type: 'texture' },
-            { name: 'projectsCitrixRedbullFloor', source: './models/projects/citrixRedbull/floorTexture.png', type: 'texture' },
-            { name: 'projectsPriorHoldingsFloor', source: './models/projects/priorHoldings/floorTexture.png', type: 'texture' },
-            { name: 'projectsOranoFloor', source: './models/projects/orano/floorTexture.png', type: 'texture' },
-            // { name: 'projectsGleecChatFloor', source: './models/projects/gleecChat/floorTexture.png', type: 'texture' },
-            // { name: 'projectsKepplerFloor', source: './models/projects/keppler/floorTexture.png', type: 'texture' },
+            { name: 'projectsCauscibenchFloor', source: './models/projects/causcibench/floorTexture.png', type: 'texture' },
+            { name: 'projectsCausalRiskFloor', source: './models/projects/causalRisk/floorTexture.png', type: 'texture' },
 
             // Information
             { name: 'informationStaticBase', source: './models/information/static/base.glb' },
@@ -130,10 +120,6 @@ export default class Resources extends EventEmitter
             // Brick
             { name: 'brickBase', source: './models/brick/base.glb' },
             { name: 'brickCollision', source: './models/brick/collision.glb' },
-
-            // Horn
-            { name: 'hornBase', source: './models/horn/base.glb' },
-            { name: 'hornCollision', source: './models/horn/collision.glb' },
 
             // Webby trophy
             { name: 'webbyTrophyBase', source: './models/webbyTrophy/base.glb' },
@@ -172,17 +158,7 @@ export default class Resources extends EventEmitter
             { name: 'tilesDCollision', source: './models/tiles/d/collision.glb' },
 
             { name: 'tilesEBase', source: './models/tiles/e/base.glb' },
-            { name: 'tilesECollision', source: './models/tiles/e/collision.glb' },
-
-            // Konami
-            { name: 'konamiLabel', source: './models/konami/label.png', type: 'texture' },
-            { name: 'konamiLabelTouch', source: './models/konami/label-touch.png', type: 'texture' },
-
-            // Wigs
-            { name: 'wig1', source: './models/wigs/wig1.glb' },
-            { name: 'wig2', source: './models/wigs/wig2.glb' },
-            { name: 'wig3', source: './models/wigs/wig3.glb' },
-            { name: 'wig4', source: './models/wigs/wig4.glb' },
+            { name: 'tilesECollision', source: './models/tiles/e/collision.glb' }
         ])
 
         this.loader.on('fileEnd', (_resource, _data) =>

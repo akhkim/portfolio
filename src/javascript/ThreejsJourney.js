@@ -100,37 +100,10 @@ export default class ThreejsJourney
 
     setLog()
     {
-//         console.log(
-//             `%c 
-// ▶
-// ▶▶▶▶
-// ▶▶▶▶▶▶▶
-// ▶▶▶▶▶▶▶▶▶▶
-// ▶▶▶▶▶▶▶▶     ▶
-// ▶▶▶▶      ▶▶▶▶▶▶▶▶
-// ▶     ▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶
-//    ▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶
-//       ▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶      
-// ▶▶        ▶▶▶▶▶▶▶▶▶▶     ▶   ▶▶▶
-// ▶▶▶▶▶▶        ▶      ▶▶▶▶▶   ▶▶▶▶▶▶
-// ▶▶▶▶▶▶▶▶▶▶▶       ▶▶▶▶▶▶▶▶   ▶▶▶▶▶▶▶▶▶
-// ▶▶▶▶▶▶▶▶▶▶▶▶▶   ▶▶▶▶▶▶▶▶▶▶   ▶▶▶▶▶▶▶
-// ▶▶▶▶▶▶▶▶▶▶▶▶▶   ▶▶▶▶▶▶▶▶▶▶   ▶▶▶▶
-// ▶▶▶▶▶▶▶▶▶▶▶▶▶   ▶▶▶▶▶▶▶▶▶▶   ▶
-//  ▶▶▶▶▶▶▶▶▶▶▶▶   ▶▶▶▶▶▶▶▶▶▶
-//      ▶▶▶▶▶▶▶▶   ▶▶▶▶▶▶▶
-// ▶▶▶▶     ▶▶▶▶   ▶▶▶
-// ▶▶▶▶▶▶▶     ▶   
-// ▶▶▶▶▶▶▶▶▶▶
-// ▶▶▶▶▶▶▶
-// ▶▶
-//             `,
-//             'color: #705df2;'
-//         )
-        console.log('%cWhat are you doing here?! you sneaky developer...', 'color: #32ffce');
-        console.log('%cDo you want to learn how this portfolio has been made?', 'color: #32ffce');
-        console.log('%cCheckout Bruno Simon\'s open-source version of similar portfolio 👉 https://github.com/brunosimon/folio-2019', 'color: #32ffce');
-        console.log('%c— Andrew', 'color: #777777');
+        console.log('%cA curious traveller, peeking below deck...', 'color: #209EFF')
+        console.log('%cWondering how this paper crane was folded?', 'color: #209EFF')
+        console.log('%cIt glides thanks to Bruno Simon\'s open-source folio 👉 https://github.com/brunosimon/folio-2019', 'color: #209EFF')
+        console.log('%c— Andrew', 'color: #777777')
     }
 
     hide()

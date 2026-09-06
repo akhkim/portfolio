@@ -21,5 +21,5 @@ export default defineConfig({
         glsl(), // Support GLSL files
         restart({ restart: [ '../static/**', ] }) // Restart server on static file change
     ],
-    base: "portfolio"
+    base: "/portfolio/"
 })

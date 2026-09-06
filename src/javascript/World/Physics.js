@@ -193,7 +193,7 @@ export default class Physics
                 if(_event.body.mass === 0)
                 {
                     const relativeVelocity = _event.contact.getImpactVelocityAlongNormal()
-                    this.sounds.play('carHit', relativeVelocity)
+                    this.sounds.play('woodHit', relativeVelocity)
                 }
             })
 

@@ -54,7 +54,6 @@ export default class Car
         this.movement.localSpeed = new THREE.Vector3()
         this.movement.acceleration = new THREE.Vector3()
         this.movement.localAcceleration = new THREE.Vector3()
-        this.movement.lastScreech = 0
 
         // Time tick
         this.time.on('tick', () =>
@@ -69,15 +68,9 @@ export default class Car
             this.movement.localSpeed = this.movement.speed.clone().applyAxisAngle(new THREE.Vector3(0, 0, 1), - this.chassis.object.rotation.z)
             this.movement.localAcceleration = this.movement.acceleration.clone().applyAxisAngle(new THREE.Vector3(0, 0, 1), - this.chassis.object.rotation.z)
 
-            // Sound
+            // Glide gauge (kept so other modules can read the crane's momentum)
             this.sounds.engine.speed = this.movement.localSpeed.x
             this.sounds.engine.acceleration = this.controls.actions.up ? (this.controls.actions.boost ? 1 : 0.5) : 0
-
-            if(this.movement.localAcceleration.x > 0.03 && this.time.elapsed - this.movement.lastScreech > 5000)
-            {
-                this.movement.lastScreech = this.time.elapsed
-                this.sounds.play('screech')
-            }
         })
     }
 
@@ -215,6 +208,10 @@ export default class Car
         })
     }
 
+    /**
+     * H key makes the crane hop, like a gust catching a paper wing.
+     * (No horn: the car klaxon and the horn-rain easter egg were removed.)
+     */
     setKlaxon()
     {
         this.klaxon = {}
@@ -222,7 +219,7 @@ export default class Car
 
         window.addEventListener('keydown', (_event) =>
         {
-            // Play horn sound
+            // Hop
             if(_event.code === 'KeyH')
             {
                 if(this.time.elapsed - this.klaxon.lastTime > 400)
@@ -230,28 +227,6 @@ export default class Car
                     this.physics.car.jump(false, 150)
                     this.klaxon.lastTime = this.time.elapsed
                 }
-
-                this.sounds.play(Math.random() < 0.002 ? 'carHorn2' : 'carHorn1')
-            }
-
-            // Rain horns
-            if(_event.key === 'k')
-            {
-                const x = this.position.x + (Math.random() - 0.5) * 3
-                const y = this.position.y + (Math.random() - 0.5) * 3
-                const z = 6 + 2 * Math.random()
-
-                this.objects.add({
-                    base: this.resources.items.hornBase.scene,
-                    collision: this.resources.items.hornCollision.scene,
-                    offset: new THREE.Vector3(x, y, z),
-                    rotation: new THREE.Euler(Math.random() * Math.PI * 2, Math.random() * Math.PI * 2, Math.random() * Math.PI * 2),
-                    duplicated: true,
-                    shadow: { sizeX: 1.5, sizeY: 1.5, offsetZ: - 0.15, alpha: 0.35 },
-                    mass: 5,
-                    soundName: 'horn',
-                    sleep: false
-                })
             }
         })
     }

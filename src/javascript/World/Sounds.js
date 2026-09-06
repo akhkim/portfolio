@@ -72,17 +72,6 @@ export default class Sounds
                 rateMax: 0.2
             },
             {
-                name: 'carHit',
-                sounds: ['./sounds/car-hits/car-hit-1.mp3', './sounds/car-hits/car-hit-3.mp3', './sounds/car-hits/car-hit-4.mp3', './sounds/car-hits/car-hit-5.mp3'],
-                minDelta: 100,
-                velocityMin: 2,
-                velocityMultiplier: 1,
-                volumeMin: 0.2,
-                volumeMax: 0.6,
-                rateMin: 0.35,
-                rateMax: 0.55
-            },
-            {
                 name: 'woodHit',
                 sounds: ['./sounds/wood-hits/wood-hit-1.mp3'],
                 minDelta: 30,
@@ -94,17 +83,6 @@ export default class Sounds
                 rateMax: 1.5
             },
             {
-                name: 'screech',
-                sounds: ['./sounds/screeches/screech-1.mp3'],
-                minDelta: 1000,
-                velocityMin: 0,
-                velocityMultiplier: 1,
-                volumeMin: 0.75,
-                volumeMax: 1,
-                rateMin: 0.9,
-                rateMax: 1.1
-            },
-            {
                 name: 'uiArea',
                 sounds: ['./sounds/ui/area-1.mp3'],
                 minDelta: 100,
@@ -114,39 +92,6 @@ export default class Sounds
                 volumeMax: 1,
                 rateMin: 0.95,
                 rateMax: 1.05
-            },
-            {
-                name: 'carHorn1',
-                sounds: ['./sounds/car-horns/car-horn-1.mp3'],
-                minDelta: 0,
-                velocityMin: 0,
-                velocityMultiplier: 1,
-                volumeMin: 0.95,
-                volumeMax: 1,
-                rateMin: 1,
-                rateMax: 1
-            },
-            {
-                name: 'carHorn2',
-                sounds: ['./sounds/car-horns/car-horn-2.mp3'],
-                minDelta: 0,
-                velocityMin: 0,
-                velocityMultiplier: 1,
-                volumeMin: 0.95,
-                volumeMax: 1,
-                rateMin: 1,
-                rateMax: 1
-            },
-            {
-                name: 'horn',
-                sounds: ['./sounds/horns/horn-1.mp3', './sounds/horns/horn-2.mp3', './sounds/horns/horn-3.mp3'],
-                minDelta: 100,
-                velocityMin: 1,
-                velocityMultiplier: 0.75,
-                volumeMin: 0.5,
-                volumeMax: 1,
-                rateMin: 0.75,
-                rateMax: 1
             }
         ]
 
@@ -216,6 +161,13 @@ export default class Sounds
         }
     }
 
+    /**
+     * The paper crane has no engine, so no looping drone is created here.
+     * The `engine` object is kept alive because other modules still write to it
+     * (Car.js feeds speed/acceleration, World/index.js tweens volume.master).
+     * It is now a silent glide gauge: the progress value is still computed and
+     * can be used to drive visuals, but nothing is ever played.
+     */
     setEngine()
     {
         // Set up
@@ -230,21 +182,10 @@ export default class Sounds
         this.engine.acceleration = 0
         this.engine.accelerationMultiplier = 0.4
 
-        this.engine.rate = {}
-        this.engine.rate.min = 0.4
-        this.engine.rate.max = 1.4
-
         this.engine.volume = {}
-        this.engine.volume.min = 0.4
-        this.engine.volume.max = 1
         this.engine.volume.master = 0
 
-        this.engine.sound = new Howl({
-            src: ['./sounds/engines/1/low_off.mp3'],
-            loop: true
-        })
-
-        this.engine.sound.play()
+        this.engine.sound = null
 
         // Time tick
         this.time.on('tick', () =>
@@ -253,26 +194,16 @@ export default class Sounds
             progress = Math.min(Math.max(progress, 0), 1)
 
             this.engine.progress += (progress - this.engine.progress) * this.engine[progress > this.engine.progress ? 'progressEasingUp' : 'progressEasingDown']
-
-            // Rate
-            const rateAmplitude = this.engine.rate.max - this.engine.rate.min
-            this.engine.sound.rate(this.engine.rate.min + rateAmplitude * this.engine.progress)
-
-            // Volume
-            const volumeAmplitude = this.engine.volume.max - this.engine.volume.min
-            this.engine.sound.volume((this.engine.volume.min + volumeAmplitude * this.engine.progress) * this.engine.volume.master)
         })
 
         // Debug
         if(this.debug)
         {
-            const folder = this.debugFolder.addFolder('engine')
+            const folder = this.debugFolder.addFolder('glide')
             folder.open()
 
             folder.add(this.engine, 'progressEasingUp').step(0.001).min(0).max(1).name('progressEasingUp')
             folder.add(this.engine, 'progressEasingDown').step(0.001).min(0).max(1).name('progressEasingDown')
-            folder.add(this.engine.rate, 'min').step(0.001).min(0).max(4).name('rateMin')
-            folder.add(this.engine.rate, 'max').step(0.001).min(0).max(4).name('rateMax')
             folder.add(this.engine, 'speedMultiplier').step(0.01).min(0).max(5).name('speedMultiplier')
             folder.add(this.engine, 'accelerationMultiplier').step(0.01).min(0).max(100).name('accelerationMultiplier')
             folder.add(this.engine, 'progress').step(0.01).min(0).max(1).name('progress').listen()
